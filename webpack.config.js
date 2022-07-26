@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
   devServer: {
     static: './dist',
-  }, 
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
@@ -21,6 +21,14 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },
