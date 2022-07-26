@@ -1,36 +1,75 @@
-# Tv-shows and Movies
+# ShowBizz
 
+ShowBizz is a website that shows you all the latest Tv-shows and Movies, you can browse, like and comment your favourites, you can get the details about a particular show and movie.
 
 ## Built With
 
-- Html, Css, JavaScript
-- webpack
-- git & github
+- Languages
 
-## Live Demo
+  - [ ] HTML
+  - [ ] CSS
+  - [ ] JavaScript
 
+- Terminologies used
+  - [ ] Linters
+  - [ ] External API
+  - [ ] Jest
+  - [ ] Github workflow
+  - [ ] Gitflow
+  - [ ] Webpack
 
+ 
+## Live Demo Link
+
+Access the the online version of my application with this link
+[Live Demo](https://PinkMoon25.github.io/ShowBizz/)
 
 ### Prerequisites
 
 have a working git on your localmachine.
 
-## Install
+## Setup
 
-To get a working local copy up and running follow these simple steps
-- open terminal
-- clone this project with the command:
+If you installed git you can clone the code to your machine, or download a ZIP of all the files directly.
 
-```
+[Download the ZIP from this location](https://github.com/PinkMoon25/ShowBizz/archive/refs/heads/main.zip), or run the following [git](https://git-scm.com/downloads) command to clone the files to your machine:
 
-```
-- Finally, run the next command in the terminal to see the web app in your local browser, or also, you can use Live Server in Visual Studio Code.
-```
-$ npm start
-```
+- Once the files are on your machine, open the _leaderboard_ folder in [Visual Studio Code](https://code.visualstudio.com/), and follow the steps in Installation & Set Up
+
+
+## 🛠 Installation & Set Up
+
+1. Install Node Modules
+
+   ```sh
+   npm install
+   ```
+
+2. Start the development server
+
+   ```
+   npm start
+   ```
+
+3. Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
+
+## 🚀 Building and Running for Production
+
+1. Generate a full static production build
+
+   ```sh
+   npm run build
+   ```
 ### Usage
 For anyone that whats to learn html & css & Js
 
+### Run tests
+
+Test the application with this command
+
+```
+npm test
+```
 
 ## Authors
 
@@ -50,7 +89,7 @@ For anyone that whats to learn html & css & Js
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page](https://github.com/PinkMoon25/ShowBizz/issues/).
 
 ## Show your support
 
