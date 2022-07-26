@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 :root {
-  --primary-color: #663399;
+  --primary-color: #639;
 }
 
 body {
@@ -27,6 +27,10 @@ ul {
   gap: 24px;
 }
 
+a {
+  text-decoration: none;
+}
+
 li a {
   color: #fff;
 }
@@ -35,12 +39,13 @@ li a {
   border-bottom: 3px solid aqua;
 }
 
-li a:hover {
-  color: #9f9f9d;
+footer a {
+  color: black;
+  font-size: 20px;
 }
 
-a {
-  text-decoration: none;
+li a:hover {
+  color: #9f9f9d;
 }
 
 footer {
@@ -48,12 +53,6 @@ footer {
   color: white;
   position: absolute;
   width: 100%;
-  bottom: 0px;
+  bottom: 0;
   padding: 20px;
 }
-
-footer a {
-  color: black;
-  font-size: 20px;
-}
-
