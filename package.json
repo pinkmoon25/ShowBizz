@@ -1,7 +1,7 @@
 {
   "name": "webpack",
   "version": "1.0.0",
-  "description": "![](https://img.shields.io/badge/Microverse-blueviolet)",
+  "description": "ShowBizz is a website that shows you all the latest Tv-shows and Movies, you can browse, like and comment your favourites, you can get the details about a particular show and movie.",
   "private": "true",
   "scripts": {
     "test": "jest --coverage",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PinkMoon25/webpack.git"
+    "url": "git+https://github.com/PinkMoon25/ShowBizz.git"
   },
   "keywords": [],
-  "author": "Tushar",
-  "license": "ISC",
+  "author": "Tushar and Desmond",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PinkMoon25/webpack/issues"
+    "url": "https://github.com/PinkMoon25/ShowBizz/issues"
   },
-  "homepage": "https://github.com/PinkMoon25/webpack#readme",
+  "homepage": "https://github.com/PinkMoon25/ShowBizz#readme",
   "devDependencies": {
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
