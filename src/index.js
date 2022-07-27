@@ -13,7 +13,7 @@ const getShows = async () => {
 
 // create popup
 
-async function renderPopup(i) {
+const renderPopup = async (i) => {
   const show = await getShows();
   modalSection.innerHTML = '';
   const popupContainer = document.createElement('div');
