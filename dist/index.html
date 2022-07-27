@@ -1,22 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" href="./images/show-logo.jpg" type="image/x-icon">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShowBizz</title>
-<script defer src="main.js"></script></head>
-<body>
-  <header>
-    <nav>
-      <a href="./index.html"><img class="logo-image" src="./images/show-logo.jpg" alt="Website logo"></a>
-      <ul>
-        <li><a href="#">Latest Shows</a></li>
-        <li><a href="#">Top-rated</a></li>
-        <li><a href="#">Favourites</a></li>
-      </ul>
-    </nav>
-  </header>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="shortcut icon"
+      href="./images/show-logo.jpg"
+      type="image/x-icon"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShowBizz</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <header>
+      <nav>
+        <a href="./index.html"
+          ><img
+            class="logo-image"
+            src="./images/show-logo.jpg"
+            alt="Website logo"
+        /></a>
+        <ul>
+          <li class="active-nav"><a href="#">Latest Shows</a></li>
+          <li><a href="#">Top-rated</a></li>
+          <li><a href="#">Favourites</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <div class="shows-container">
+          <!-- All shows appear here .. -->
+          <div class="loaderContainer">
+            <div id="loader">
+              <div id="shadow"></div>
+              <div id="box"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="modal">
+        <!-- All popups appear here .. -->
+      </section>
+    </main>
+    <footer>
+      Created by
+      <a href="https://github.com/PinkMoon25">
+        <u><i>Tushar</i></u>
+      </a>
+      and
+      <a href="https://github.com/Owusu-Desmond"
+        ><u><i>Desmond</i></u></a
+      >
+      Under MIT License
+    </footer>
+  </body>
 </html>
