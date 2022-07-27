@@ -1,3 +1,3 @@
-const showAP1_URL = 'https://api.tvmaze.com/shows';
+const showApiUrl = 'https://api.tvmaze.com/shows';
 
-export default showAP1_URL;
+export default showApiUrl;
