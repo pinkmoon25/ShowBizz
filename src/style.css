@@ -59,7 +59,8 @@ li a:hover {
   place-items: center;
 }
 
-button , img {
+button,
+img {
   cursor: pointer;
 }
 
@@ -126,6 +127,12 @@ figure a img:hover {
   transform: scale(1.1);
 }
 
+.popup-img {
+  width: 100%;
+  padding-bottom: 12px;
+  border-radius: 4px;
+}
+
 a > .popup-img:hover {
   transition: all 0.3s ease;
   transform: scale(0.96);
@@ -165,14 +172,14 @@ figcaption {
 
 .modal {
   display: none;
-  position: fixed; 
-  z-index: 1; 
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.9);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .popup-container {
@@ -200,12 +207,6 @@ figcaption {
   flex-direction: column;
   align-items: center;
   max-width: 800px;
-}
-
-.popup-img {
-  width: 100%;
-  padding-bottom: 12px;
-  border-radius: 4px;
 }
 
 .popup-details {
