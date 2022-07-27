@@ -24,6 +24,7 @@ const renderShows = async () => {
     const showContainer = document.createElement('div');
     const commentBtnContainer = document.createElement('div');
     const commentBtn = document.createElement('button');
+    const showLink = document.createElement('a');
     const showImage = document.createElement('img');
     const fig = document.createElement('figure');
     const figcaption = document.createElement('figcaption');
@@ -36,6 +37,8 @@ const renderShows = async () => {
 
     showImage.setAttribute('src', show.image.medium);
     showImage.setAttribute('alt', `${show.name} image`);
+    showLink.setAttribute('href', show.url);
+    showLink.setAttribute('target', '_blank');
 
     p.innerText = `${show.name}`;
     symbolContainer.innerHTML = '&#9825;';
@@ -50,7 +53,8 @@ const renderShows = async () => {
     figcaption.appendChild(p);
     figcaption.appendChild(symbolContainer);
     figcaption.appendChild(likesContainer);
-    fig.appendChild(showImage);
+    showLink.appendChild(showImage);
+    fig.appendChild(showLink);
     fig.appendChild(figcaption);
     commentBtnContainer.appendChild(commentBtn);
     showContainer.appendChild(fig);
@@ -70,31 +74,51 @@ async function renderPopup(i){
     const popupContainer = document.createElement('div');
     const closeBtn = document.createElement('button');
     const popupFig = document.createElement('figure');
+    const popupShowLink = document.createElement('a');
     const popupImage = document.createElement('img');
     const figcaption = document.createElement('figcaption');
     const popupShowTitle = document.createElement('h3');
+    const showDetails = document.createElement('div');
+    const genre = document.createElement('span');
+    const rating = document.createElement('span');
+    const premiered = document.createElement('span');
+
     
     popupContainer.classList.add('popup-container');
     closeBtn.classList.add('close-popup');
     figcaption.classList.add('popup-details');
     popupImage.classList.add('popup-img');
+    showDetails.classList.add('show-details');
 
     popupImage.setAttribute('src', show[i].image.original);
     popupImage.setAttribute('alt', `${show[i].name} image`);
+    popupShowLink.setAttribute('href', show[i].url);
+    popupShowLink.setAttribute('target', '_blank');
     
     closeBtn.innerHTML = '&times;';
     popupShowTitle.innerHTML = show[i].name;
     figcaption.innerHTML = show[i].summary;
+    // const genres = show[i].genre.map((gen) => {
+    //   return 
+    // })
+    genre.innerHTML = `Genres: ${show[i].genres.join(', ')}`;
+    rating.innerHTML = `Rating: ${show[i].rating.average}`;
+    premiered.innerHTML = `premiered: ${show[i].premiered}`;
 
     figcaption.appendChild(popupShowTitle);
-    popupFig.appendChild(popupImage);
+    popupShowLink.appendChild(popupImage);
+    popupFig.appendChild(popupShowLink);
     popupFig.appendChild(figcaption);
+    showDetails.appendChild(genre);
+    showDetails.appendChild(rating);
+    showDetails.appendChild(premiered);
     popupContainer.appendChild(closeBtn);
     popupContainer.appendChild(popupFig);
+    popupContainer.appendChild(showDetails);
 
     modalSection.appendChild(popupContainer);
     closeBtn.addEventListener('click', ()=>{
       modalSection.style.display = 'none';
-      body.style.overflowY = 'auto'
+      body.style.overflowY = 'auto';
     })
 };
