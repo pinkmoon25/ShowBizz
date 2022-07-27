@@ -59,6 +59,10 @@ li a:hover {
   place-items: center;
 }
 
+button , img {
+  cursor: pointer;
+}
+
 /* Loading api animation */
 .loaderContainer {
   width: 100%;
@@ -102,7 +106,7 @@ li a:hover {
 #shadow {
   width: 50px;
   height: 5px;
-  background: #000;
+  background: #fdfdfd;
   opacity: 0.1;
   position: absolute;
   top: 59px;
@@ -115,6 +119,16 @@ li a:hover {
   50% {
     transform: scale(1.2, 1);
   }
+}
+
+figure a img:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.1);
+}
+
+a > .popup-img:hover {
+  transition: all 0.3s ease;
+  transform: scale(0.96);
 }
 
 figcaption {
@@ -134,6 +148,21 @@ figcaption {
   justify-content: center;
 }
 
+.comment-btn-container > button {
+  border: none;
+  border-radius: 3px;
+  padding: 5px 8px;
+  font-size: 16px;
+  color: #fff;
+  background-color: rgb(102, 51, 153);
+}
+
+.comment-btn-container > button:hover {
+  transition: all 0.3s ease;
+  transform: scale(0.95);
+  background-color: rgba(102, 51, 153, 0.7);
+}
+
 .modal {
   display: none;
   position: fixed; 
@@ -147,6 +176,7 @@ figcaption {
 }
 
 .popup-container {
+  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,10 +199,11 @@ figcaption {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
 }
 
 .popup-img {
-  width: 50%;
+  width: 100%;
   padding-bottom: 12px;
   border-radius: 4px;
 }
@@ -186,6 +217,19 @@ figcaption {
 h3 {
   margin: 0;
   order: -1;
+  color: cornflowerblue;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.show-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  font-weight: 700;
+  color: cornflowerblue;
 }
 
 footer {
