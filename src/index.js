@@ -62,7 +62,7 @@ const renderPopup = async (i) => {
     modalSection.style.display = 'none';
     body.style.overflowY = 'auto';
   });
-}
+};
 
 // create show List
 
