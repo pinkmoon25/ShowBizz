@@ -194,6 +194,7 @@ figcaption {
     transform: scale(1);
     opacity: 1;
   }
+
   to {
     z-index: -1;
     transform: scale(0);
@@ -214,6 +215,7 @@ figcaption {
     transform: scale(0);
     opacity: 0;
   }
+
   to {
     z-index: 2;
     transform: scale(1);
