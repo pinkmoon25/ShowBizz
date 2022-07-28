@@ -1,20 +1,14 @@
 import './style.css';
 import showApiUrl from './config/showsAPI';
+import likesApi from './config/involvement';
+import { postData, getApiData } from './server';
 
 const modalSection = document.querySelector('.modal');
 const body = document.querySelector('body');
 
-// get shows from API source function
-const getShows = async () => {
-  const res = await fetch(showApiUrl);
-  const result = await res.json();
-  return result;
-};
-
 // create popup
-
 const renderPopup = async (i) => {
-  const show = await getShows();
+  const show = await getApiData(showApiUrl);
   modalSection.innerHTML = '';
   const popupContainer = document.createElement('div');
   const closeBtn = document.createElement('button');
@@ -68,9 +62,11 @@ const renderPopup = async (i) => {
 // create show List
 
 const renderShows = async () => {
-  const shows = await getShows(showApiUrl);
+  const shows = await getApiData(showApiUrl);
   const showSection = document.querySelector('.shows-container');
   shows.length = 20;
+  // sort randomly whenever the page is loaded;
+  shows.sort(() => 0.5 - Math.random());
   document.querySelector('.loaderContainer').remove();
   shows.forEach((show, index) => {
     const symbolContainer = document.createElement('span');
@@ -89,20 +85,39 @@ const renderShows = async () => {
     likesContainer.classList.add('likes-count');
     commentBtnContainer.classList.add('comment-btn-container');
 
+    likesContainer.setAttribute('data-id', `showId${show.id}`);
+    symbolContainer.setAttribute('title', 'like');
     showImage.setAttribute('src', show.image.medium);
     showImage.setAttribute('alt', `${show.name} image`);
     showLink.setAttribute('href', show.url);
     showLink.setAttribute('target', '_blank');
 
     p.innerText = `${show.name}`;
-    symbolContainer.innerHTML = '&#9825;';
-    likesContainer.innerText = '100';
+    symbolContainer.innerHTML = '&#9825';
     commentBtn.textContent = 'comments';
     commentBtn.addEventListener('click', () => {
       modalSection.classList.remove('hide-modal');
       modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
       renderPopup(index);
+    });
+
+    symbolContainer.addEventListener('click', () => {
+      let likeContainer = symbolContainer.nextSibling;
+      // unlike show and stop updating it on the source api
+      if (symbolContainer.innerHTML === '❤') {
+        likeContainer.innerHTML = Number(likeContainer.innerHTML) - 1;
+        symbolContainer.innerHTML = '&#9825';
+        return;
+      }
+      symbolContainer.innerHTML = '&#10084;';
+
+      likeContainer.innerHTML = Number(likeContainer.innerHTML) + 1;
+      likeContainer = likeContainer.getAttribute('data-id');
+      const data = {
+        item_id: likeContainer,
+      };
+      postData(data, likesApi);
     });
 
     figcaption.appendChild(p);
@@ -119,4 +134,19 @@ const renderShows = async () => {
   });
 };
 
+const renderLikes = async () => {
+  const likes = await getApiData(likesApi);
+  likes.forEach((like, index) => {
+    const likeContainer = document.querySelector(`[data-id = '${like.item_id}']`);
+    if (index < 20) {
+      likeContainer.innerHTML = like.likes;
+    }
+  });
+};
+
 renderShows();
+
+// render likes after DOM content have been loaded
+document.addEventListener('DOMContentLoaded', () => {
+  renderLikes();
+});
