@@ -59,7 +59,8 @@ const renderPopup = async (i) => {
 
   modalSection.appendChild(popupContainer);
   closeBtn.addEventListener('click', () => {
-    modalSection.style.display = 'none';
+    modalSection.classList.remove('show-modal');
+    modalSection.classList.add('hide-modal');
     body.style.overflowY = 'auto';
   });
 };
@@ -98,7 +99,8 @@ const renderShows = async () => {
     likesContainer.innerText = '100';
     commentBtn.textContent = 'comments';
     commentBtn.addEventListener('click', () => {
-      modalSection.style.display = 'block';
+      modalSection.classList.remove('hide-modal');
+      modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
       renderPopup(index);
     });
