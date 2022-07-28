@@ -148,6 +148,8 @@ figcaption {
 .like-symbol {
   font-size: 30px;
   font-weight: 600;
+  color: #f00;
+  cursor: pointer;
 }
 
 .comment-btn-container {
