@@ -65,6 +65,8 @@ const renderShows = async () => {
   const shows = await getApiData(showApiUrl);
   const showSection = document.querySelector('.shows-container');
   shows.length = 20;
+  // sort randomly whenever the page is loaded;
+  shows.sort(() => 0.5 - Math.random());
   document.querySelector('.loaderContainer').remove();
   shows.forEach((show, index) => {
     const symbolContainer = document.createElement('span');
@@ -136,7 +138,7 @@ const renderLikes = async () => {
   const likes = await getApiData(likesApi);
   likes.forEach((like, index) => {
     const likeContainer = document.querySelector(`[data-id = '${like.item_id}']`);
-    if (index < 19) {
+    if (index < 20) {
       likeContainer.innerHTML = like.likes;
     }
   });
