@@ -19,6 +19,28 @@ header {
   background-color: var(--primary-color);
 }
 
+.logo-link {
+  margin: 7px 0;
+  padding: 5px 12px;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+  font-weight: 700;
+}
+
+.show {
+  font-size: 25px;
+  color: #ffe9e4;
+}
+
+.bizz {
+  font-size: 25px;
+  color: #aceef3;
+}
+
 nav {
   display: flex;
   align-items: center;
