@@ -23,6 +23,7 @@ const renderPopup = async (i) => {
   const genre = document.createElement('span');
   const rating = document.createElement('span');
   const premiered = document.createElement('span');
+  const commentsCount = document.createElement('p')
   const commentForm = document.createElement('form');
   const commentInput = document.createElement('input');
   const commentText = document.createElement('textarea');
@@ -40,6 +41,7 @@ const renderPopup = async (i) => {
   commentInputBtn.setAttribute('required', 'true');
   commentInput.setAttribute('placeholder', 'Your name');
   commentText.setAttribute('placeholder', 'Your insights');
+  commentsCount.classList.add('comments-count')
 
   popupImage.setAttribute('src', show[i].image.original);
   popupImage.setAttribute('alt', `${show[i].name} image`);
@@ -79,6 +81,7 @@ const renderPopup = async (i) => {
   popupContainer.appendChild(closeBtn);
   popupContainer.appendChild(popupFig);
   popupContainer.appendChild(showDetails);
+  popupContainer.appendChild(commentsCount);
   popupContainer.appendChild(commentsDiv);
   popupContainer.appendChild(commentForm);
 
