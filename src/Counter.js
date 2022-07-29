@@ -7,4 +7,14 @@ const likesCount = (likes) => {
   return likes;
 };
 
-export default likesCount;
+const commentsCount = (preComments, newComment) => {
+  const comment = document.querySelector('.comment');
+  let totalComments = preComments;
+  comment.addEventListener('click', () => {
+    totalComments = preComments.push(newComment);
+  });
+  comment.click();
+  return totalComments;
+};
+
+export { likesCount, commentsCount };
