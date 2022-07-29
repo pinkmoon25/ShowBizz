@@ -5,8 +5,9 @@ import {
   postData, getApiData, postComment, getComments, renderComments,
 } from './server';
 
-const modalSection = document.querySelector('.modal');
 const body = document.querySelector('body');
+const modalSection = document.querySelector('.modal');
+const showsCounter = document.querySelector('.shows-count');
 
 // create popup
 const renderPopup = async (i) => {
@@ -99,6 +100,7 @@ const renderShows = async () => {
   const shows = await getApiData(showApiUrl);
   const showSection = document.querySelector('.shows-container');
   shows.length = 20;
+  showsCounter.innerText += `(${shows.length})`;
   // sort randomly whenever the page is loaded;
   document.querySelector('.loaderContainer').remove();
   shows.forEach((show, index) => {

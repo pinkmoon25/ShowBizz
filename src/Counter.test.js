@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { likesCount, commentsCount } from './Counter';
+import { likesCount, commentsCount, showsCount } from './Counter';
 
 describe('Count the number or likes', () => {
   test('Assume previous likes is "14" expect "15" ', () => {
@@ -14,5 +14,10 @@ describe('Count the number or likes', () => {
       { name: 'Tushar', message: 'Great' }];
     const newComment = { name: 'Mike', message: "I don't love this movie" };
     expect(commentsCount(preComments, newComment)).toEqual(3);
+  });
+  test("[show1, show2, show3, show4] expect length to be '4'", () => {
+    const shows = ['show1', 'show2', 'show3', 'show4'];
+    const result = showsCount(shows);
+    expect(result).toBe(4);
   });
 });

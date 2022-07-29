@@ -17,4 +17,6 @@ const commentsCount = (preComments, newComment) => {
   return totalComments;
 };
 
-export { likesCount, commentsCount };
+const showsCount = (shows) => shows.length;
+
+export { likesCount, commentsCount, showsCount };
