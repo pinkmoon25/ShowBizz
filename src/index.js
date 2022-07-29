@@ -27,18 +27,22 @@ const renderPopup = async (i) => {
   figcaption.classList.add('popup-details');
   popupImage.classList.add('popup-img');
   showDetails.classList.add('show-details');
-
-  popupImage.setAttribute('src', show[i].image.original);
-  popupImage.setAttribute('alt', `${show[i].name} image`);
-  popupShowLink.setAttribute('href', show[i].url);
-  popupShowLink.setAttribute('target', '_blank');
-
-  closeBtn.innerHTML = '&times;';
-  popupShowTitle.innerHTML = show[i].name;
-  figcaption.innerHTML = show[i].summary;
-  genre.innerHTML = `Genres: ${show[i].genres.join(', ')}`;
-  rating.innerHTML = `Rating: ${show[i].rating.average}`;
-  premiered.innerHTML = `premiered: ${show[i].premiered}`;
+  for(let j=0; j<show.length; j++){
+    if(show[j].id === i){
+      popupImage.setAttribute('src', show[j].image.original);
+      popupImage.setAttribute('alt', `${show[j].name} image`);
+      popupShowLink.setAttribute('href', show[j].url);
+      popupShowLink.setAttribute('target', '_blank');
+      closeBtn.innerHTML = '&times;';
+      popupShowTitle.innerHTML = show[j].name;
+      figcaption.innerHTML = show[j].summary;
+      genre.innerHTML = `Genres: ${show[j].genres.join(', ')}`;
+      rating.innerHTML = `Rating: ${show[j].rating.average}`;
+      premiered.innerHTML = `premiered: ${show[j].premiered}`;
+      break;
+    }
+  }
+  
 
   figcaption.appendChild(popupShowTitle);
   popupShowLink.appendChild(popupImage);
@@ -99,7 +103,7 @@ const renderShows = async () => {
       modalSection.classList.remove('hide-modal');
       modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
-      renderPopup(index);
+      renderPopup(show.id);
     });
 
     symbolContainer.addEventListener('click', () => {
