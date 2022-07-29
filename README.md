@@ -24,6 +24,10 @@ ShowBizz is a website that shows you all the latest Tv-shows and Movies, you can
 Access the the online version of my application with this link
 [Live Demo](https://PinkMoon25.github.io/ShowBizz/)
 
+## Presentation Link
+
+You can see our presentation of the project [here](https://drive.google.com/file/d/1ft_SjhTG-vYD4-kCs8zGFygbFGfEaR9M/view?usp=sharing)
+
 ### Prerequisites
 
 have a working git on your localmachine.
