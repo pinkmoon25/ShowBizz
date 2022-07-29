@@ -157,7 +157,7 @@ figcaption {
   justify-content: center;
 }
 
-.comment-btn-container > button {
+button {
   border: none;
   border-radius: 3px;
   padding: 5px 8px;
@@ -167,7 +167,7 @@ figcaption {
   background-color: rgb(102, 51, 153);
 }
 
-.comment-btn-container > button:hover {
+button:hover {
   transition: all 0.3s ease-in-out;
   background-color: #fff;
   color: #639;
@@ -280,6 +280,30 @@ h3 {
   flex-wrap: wrap;
   font-weight: 700;
   color: cornflowerblue;
+}
+
+form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(53, 52, 52, 0.6);
+  padding: 20px;
+  border-radius: 5px;
+  outline: none;
+}
+
+input,
+textarea {
+  padding: 5px 8px;
+}
+
+.comment-container {
+  display: flex;
+  gap: 22px;
+  font-weight: 600;
+  margin-top: 15px;
+  color: coral;
 }
 
 footer {

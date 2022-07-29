@@ -1,7 +1,9 @@
 import './style.css';
 import showApiUrl from './config/showsAPI';
-import likesApi from './config/involvement';
-import { postData, getApiData } from './server';
+import { likesApi, commentApi, commentDataApi } from './config/involvement';
+import {
+  postData, getApiData, postComment, getComments, renderComments,
+} from './server';
 
 const modalSection = document.querySelector('.modal');
 const body = document.querySelector('body');
@@ -21,24 +23,48 @@ const renderPopup = async (i) => {
   const genre = document.createElement('span');
   const rating = document.createElement('span');
   const premiered = document.createElement('span');
+  const commentForm = document.createElement('form');
+  const commentInput = document.createElement('input');
+  const commentText = document.createElement('textarea');
+  const commentInputBtn = document.createElement('button');
+  const commentsDiv = document.createElement('div');
 
   popupContainer.classList.add('popup-container');
   closeBtn.classList.add('close-popup');
   figcaption.classList.add('popup-details');
   popupImage.classList.add('popup-img');
   showDetails.classList.add('show-details');
+  commentInputBtn.classList.add('comment-input-btn');
+  commentsDiv.classList.add('comments-container');
+  commentText.setAttribute('required', 'true');
+  commentInputBtn.setAttribute('required', 'true');
+  commentInput.setAttribute('placeholder', 'Your name');
+  commentText.setAttribute('placeholder', 'Your insights');
 
   popupImage.setAttribute('src', show[i].image.original);
   popupImage.setAttribute('alt', `${show[i].name} image`);
   popupShowLink.setAttribute('href', show[i].url);
   popupShowLink.setAttribute('target', '_blank');
-
   closeBtn.innerHTML = '&times;';
   popupShowTitle.innerHTML = show[i].name;
   figcaption.innerHTML = show[i].summary;
   genre.innerHTML = `Genres: ${show[i].genres.join(', ')}`;
   rating.innerHTML = `Rating: ${show[i].rating.average}`;
   premiered.innerHTML = `premiered: ${show[i].premiered}`;
+
+  commentInputBtn.textContent = 'Comment';
+
+  commentInputBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (commentInput.value.trim() === '' || commentText.value.trim() === '') return;
+    postComment(commentApi, show[i], commentInput, commentText);
+    setTimeout(async () => {
+      const comments = await getComments(commentDataApi, show[i].id);
+      renderComments(comments);
+    }, 1000);
+    commentInput.value = '';
+    commentText.value = '';
+  });
 
   figcaption.appendChild(popupShowTitle);
   popupShowLink.appendChild(popupImage);
@@ -47,9 +73,14 @@ const renderPopup = async (i) => {
   showDetails.appendChild(genre);
   showDetails.appendChild(rating);
   showDetails.appendChild(premiered);
+  commentForm.appendChild(commentInput);
+  commentForm.appendChild(commentText);
+  commentForm.appendChild(commentInputBtn);
   popupContainer.appendChild(closeBtn);
   popupContainer.appendChild(popupFig);
   popupContainer.appendChild(showDetails);
+  popupContainer.appendChild(commentsDiv);
+  popupContainer.appendChild(commentForm);
 
   modalSection.appendChild(popupContainer);
   closeBtn.addEventListener('click', () => {
@@ -66,7 +97,6 @@ const renderShows = async () => {
   const showSection = document.querySelector('.shows-container');
   shows.length = 20;
   // sort randomly whenever the page is loaded;
-  shows.sort(() => 0.5 - Math.random());
   document.querySelector('.loaderContainer').remove();
   shows.forEach((show, index) => {
     const symbolContainer = document.createElement('span');
@@ -100,6 +130,10 @@ const renderShows = async () => {
       modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
       renderPopup(index);
+      setTimeout(async () => {
+        const comments = await getComments(commentDataApi, show.id);
+        renderComments(comments);
+      }, 1000);
     });
 
     symbolContainer.addEventListener('click', () => {
