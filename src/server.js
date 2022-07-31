@@ -6,11 +6,8 @@ const postData = async (data, api) => {
     },
     body: JSON.stringify(data),
   });
-  try {
-    await req.reject(new Error(`HTTP - ERROR${(await req).status}`));
-  } catch (error) {
-    console.error(error); //  eslint-disable-line
-  }
+  const result = await JSON.parse(JSON.stringify(req));
+  return result;
 };
 
 // get shows from API source function
@@ -20,14 +17,14 @@ const getApiData = async (showApiUrl) => {
   return result;
 };
 
-async function postComment(api, show, input, userComment) {
+async function postComment(api, id, input, userComment) {
   const response = await fetch(api, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: JSON.stringify({
-      item_id: show.id,
+      item_id: id,
       username: input.value,
       comment: userComment.value,
     }),
@@ -44,6 +41,7 @@ async function getComments(api, id) {
 
 function renderComments(comments) {
   const commentsDiv = document.querySelector('.comments-container');
+  document.querySelector('.comments-count').innerText = 'Comments (0)';
   document.querySelector('.comments-count').innerText = `Comments (${comments.length})`;
   commentsDiv.innerHTML = '';
   comments.forEach((comment) => {
