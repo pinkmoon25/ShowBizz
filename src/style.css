@@ -64,7 +64,7 @@ li a {
 }
 
 .active-nav {
-  border-bottom: 3px solid aqua;
+  border-bottom: 2px solid #fff;
 }
 
 footer a {
@@ -77,15 +77,26 @@ li a:hover {
   color: #9f9f9d;
 }
 
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  gap: 5px;
+}
+
+#search {
+  padding: 5px 8px;
+  border: none;
+  border-radius: 15px;
+  line-height: 22px;
+}
+
 /* style the shows sections */
 .shows-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   place-items: center;
-}
-
-.show-container {
-  width: 95%;
 }
 
 button,
@@ -157,7 +168,6 @@ figure {
 }
 
 figure a img {
-  width: 100%;
   border-radius: 2px;
 }
 

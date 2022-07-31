@@ -1,9 +1,12 @@
 import './style.css';
-import showApiUrl from './config/showsAPI';
+import { showApiUrl } from './config/showsAPI';
 import { likesApi, commentApi, commentDataApi } from './config/involvement';
 import {
   postData, getApiData, postComment, getComments, renderComments,
 } from './server';
+import {
+  searchBtn, search,
+} from './search';
 
 const body = document.querySelector('body');
 const modalSection = document.querySelector('.modal');
@@ -43,26 +46,30 @@ const renderPopup = async (i) => {
   commentInput.setAttribute('placeholder', 'Your name');
   commentText.setAttribute('placeholder', 'Your insights');
   commentsCount.classList.add('comments-count');
-
-  popupImage.setAttribute('src', show[i].image.original);
-  popupImage.setAttribute('alt', `${show[i].name} image`);
-  popupShowLink.setAttribute('href', show[i].url);
-  popupShowLink.setAttribute('target', '_blank');
-  closeBtn.innerHTML = '&times;';
-  popupShowTitle.innerHTML = show[i].name;
-  figcaption.innerHTML = show[i].summary;
-  genre.innerHTML = `Genres: ${show[i].genres.join(', ')}`;
-  rating.innerHTML = `Rating: ${show[i].rating.average}`;
-  premiered.innerHTML = `premiered: ${show[i].premiered}`;
+  for (let j = 0; j < show.length; j += 1) {
+    if (show[j].id === i) {
+      popupImage.setAttribute('src', show[j].image.original);
+      popupImage.setAttribute('alt', `${show[j].name} image`);
+      popupShowLink.setAttribute('href', show[j].url);
+      popupShowLink.setAttribute('target', '_blank');
+      closeBtn.innerHTML = '&times;';
+      popupShowTitle.innerHTML = show[j].name;
+      figcaption.innerHTML = show[j].summary;
+      genre.innerHTML = `Genres: ${show[j].genres.join(', ')}`;
+      rating.innerHTML = `Rating: ${show[j].rating.average}`;
+      premiered.innerHTML = `premiered: ${show[j].premiered}`;
+      break;
+    }
+  }
 
   commentInputBtn.textContent = 'Comment';
 
   commentInputBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     if (commentInput.value.trim() === '' || commentText.value.trim() === '') return;
-    postComment(commentApi, show[i], commentInput, commentText);
+    postComment(commentApi, i, commentInput, commentText);
     setTimeout(async () => {
-      const comments = await getComments(commentDataApi, show[i].id);
+      const comments = await getComments(commentDataApi, i);
       renderComments(comments);
     }, 1000);
     commentInput.value = '';
@@ -98,12 +105,12 @@ const renderPopup = async (i) => {
 
 const renderShows = async () => {
   const shows = await getApiData(showApiUrl);
+  shows.sort(() => 0.5 - Math.random());
   const showSection = document.querySelector('.shows-container');
-  shows.length = 20;
+  shows.length = 25;
   showsCounter.innerText += `(${shows.length})`;
-  // sort randomly whenever the page is loaded;
   document.querySelector('.loaderContainer').remove();
-  shows.forEach((show, index) => {
+  shows.forEach((show) => {
     const symbolContainer = document.createElement('span');
     const likesContainer = document.createElement('span');
     const showContainer = document.createElement('div');
@@ -134,7 +141,7 @@ const renderShows = async () => {
       modalSection.classList.remove('hide-modal');
       modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
-      renderPopup(index);
+      renderPopup(show.id);
       setTimeout(async () => {
         const comments = await getComments(commentDataApi, show.id);
         renderComments(comments);
@@ -175,11 +182,10 @@ const renderShows = async () => {
 
 const renderLikes = async () => {
   const likes = await getApiData(likesApi);
-  likes.forEach((like, index) => {
+  likes.forEach((like) => {
     const likeContainer = document.querySelector(`[data-id = '${like.item_id}']`);
-    if (index < 20) {
-      likeContainer.innerHTML = like.likes;
-    }
+    if (likeContainer === null) return;
+    likeContainer.innerHTML = like.likes;
   });
 };
 
@@ -188,4 +194,8 @@ renderShows();
 // render likes after DOM content have been loaded
 document.addEventListener('DOMContentLoaded', () => {
   renderLikes();
+});
+
+searchBtn.addEventListener('click', async () => {
+  search(renderPopup, getComments, postData);
 });
