@@ -41,7 +41,10 @@ async function getComments(api, id) {
 
 function renderComments(comments) {
   const commentsDiv = document.querySelector('.comments-container');
-  document.querySelector('.comments-count').innerText = 'Comments (0)';
+  if (comments.length === undefined) {
+    document.querySelector('.comments-count').innerText = 'Comments (0)';
+    return;
+  }
   document.querySelector('.comments-count').innerText = `Comments (${comments.length})`;
   commentsDiv.innerHTML = '';
   comments.forEach((comment) => {

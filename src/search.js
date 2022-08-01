@@ -1,6 +1,6 @@
 import { searchShowUrl } from './config/showsAPI';
-import { commentDataApi, likesApi } from './config/involvement';
-import { renderComments } from './server';
+import { commentApi, commentDataApi, likesApi } from './config/involvement';
+import { renderComments, postComment } from './server';
 
 const searchInput = document.querySelector('#search');
 const searchBtn = document.querySelector('.search');
@@ -12,7 +12,7 @@ const searchShows = async () => {
   return result;
 };
 
-async function search(renderPopup, getComments, postData) {
+async function search(getComments, postData) {
   const body = document.querySelector('body');
   const showSection = document.querySelector('.shows-container');
   const modalSection = document.querySelector('.modal');
@@ -49,7 +49,86 @@ async function search(renderPopup, getComments, postData) {
       modalSection.classList.remove('hide-modal');
       modalSection.classList.add('show-modal');
       body.style.overflowY = 'hidden';
-      renderPopup(search.show.id);
+      modalSection.innerHTML = '';
+      const popupContainer = document.createElement('div');
+      const closeBtn = document.createElement('button');
+      const popupFig = document.createElement('figure');
+      const popupShowLink = document.createElement('a');
+      const popupImage = document.createElement('img');
+      const figcaption = document.createElement('figcaption');
+      const popupShowTitle = document.createElement('h3');
+      const showDetails = document.createElement('div');
+      const genre = document.createElement('span');
+      const rating = document.createElement('span');
+      const premiered = document.createElement('span');
+      const commentsCount = document.createElement('p');
+      const commentForm = document.createElement('form');
+      const commentInput = document.createElement('input');
+      const commentText = document.createElement('textarea');
+      const commentInputBtn = document.createElement('button');
+      const commentsDiv = document.createElement('div');
+
+      popupContainer.classList.add('popup-container');
+      closeBtn.classList.add('close-popup');
+      figcaption.classList.add('popup-details');
+      popupImage.classList.add('popup-img');
+      showDetails.classList.add('show-details');
+      commentInputBtn.classList.add('comment-input-btn');
+      commentsDiv.classList.add('comments-container');
+      commentText.setAttribute('required', 'true');
+      commentInputBtn.setAttribute('required', 'true');
+      commentInput.setAttribute('placeholder', 'Your name');
+      commentText.setAttribute('placeholder', 'Your insights');
+      commentsCount.classList.add('comments-count');
+
+      popupImage.setAttribute('src', search.show.image.original);
+      popupImage.setAttribute('alt', `${search.show.name} image`);
+      popupShowLink.setAttribute('href', search.show.url);
+      popupShowLink.setAttribute('target', '_blank');
+      closeBtn.innerHTML = '&times;';
+      popupShowTitle.innerHTML = search.show.name;
+      figcaption.innerHTML = search.show.summary;
+      genre.innerHTML = `Genres: ${search.show.genres.join(', ')}`;
+      rating.innerHTML = `Rating: ${search.show.rating.average}`;
+      premiered.innerHTML = `premiered: ${search.show.premiered}`;
+
+      commentInputBtn.textContent = 'Comment';
+
+      commentInputBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (commentInput.value.trim() === '' || commentText.value.trim() === '') return;
+        postComment(commentApi, search.show.id, commentInput, commentText);
+        setTimeout(async () => {
+          const comments = await getComments(commentDataApi, search.show.id);
+          renderComments(comments);
+        }, 1000);
+        commentInput.value = '';
+        commentText.value = '';
+      });
+
+      figcaption.appendChild(popupShowTitle);
+      popupShowLink.appendChild(popupImage);
+      popupFig.appendChild(popupShowLink);
+      popupFig.appendChild(figcaption);
+      showDetails.appendChild(genre);
+      showDetails.appendChild(rating);
+      showDetails.appendChild(premiered);
+      commentForm.appendChild(commentInput);
+      commentForm.appendChild(commentText);
+      commentForm.appendChild(commentInputBtn);
+      popupContainer.appendChild(closeBtn);
+      popupContainer.appendChild(popupFig);
+      popupContainer.appendChild(showDetails);
+      popupContainer.appendChild(commentsCount);
+      popupContainer.appendChild(commentsDiv);
+      popupContainer.appendChild(commentForm);
+
+      modalSection.appendChild(popupContainer);
+      closeBtn.addEventListener('click', () => {
+        modalSection.classList.remove('show-modal');
+        modalSection.classList.add('hide-modal');
+        body.style.overflowY = 'auto';
+      });
       setTimeout(async () => {
         const comments = await getComments(commentDataApi, search.show.id);
         renderComments(comments);
