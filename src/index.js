@@ -197,5 +197,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 searchBtn.addEventListener('click', async () => {
-  search(renderPopup, getComments, postData);
+  search(getComments, postData);
 });
