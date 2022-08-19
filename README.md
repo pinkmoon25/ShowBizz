@@ -1,6 +1,6 @@
 # ShowBizz
 
-ShowBizz is a website that shows you all the latest Tv-shows and Movies, you can browse, like and comment your favourites, you can get the details about a particular show and movie.
+ShowBizz is a website that shows you all the latest Tv-shows and Movies, you can browse, like, and comment on your favorites. Users can get the details about a particular show and movie. ShowBizz also has a search feature that allows you to search for a particular show or movie.
 
 ## Built With
 
