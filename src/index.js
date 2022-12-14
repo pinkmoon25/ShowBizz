@@ -105,7 +105,7 @@ const renderPopup = async (i) => {
 
 const renderShows = async () => {
   const shows = await getApiData(showApiUrl);
-  // shows.sort(() => 0.5 - Math.random());
+  shows.sort(() => 0.5 - Math.random());
   const showSection = document.querySelector('.shows-container');
   shows.length = 25;
   showsCounter.innerText += `(${shows.length})`;
